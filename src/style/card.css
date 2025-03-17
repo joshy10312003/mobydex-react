@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    user-select: none; /* Prevent text selection */
+}
+
+.container {
+    overflow: hidden; /* Prevent horizontal scroll */
+    width: 100%; /* Ensure container takes full width */
+}
+
+.swiper-container {
+    width: 100%; /* Ensure Swiper takes full width */
+
+}
+
+.card-panel {
+    display: flex;
+    margin: 0;
+    padding: 5px 20px 20px 0;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    width: 230px;
+    height: 470px;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.8px);
+    -webkit-backdrop-filter: blur(4.8px);
+    overflow: hidden;
+}
+
+.card-img-top {
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.card-body {
+    display: block;
+    padding: 0 5px 5px 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.card-body p {
+    font-size: 15px;
+}
+.card-body .card-title:hover{
+    text-decoration: underline;
+}
+
+/* --------- BUTTON ------------*/
+.buttonBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.buttonBox .more-detail {
+    position: relative;
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px 0;
+    color: rgba(255, 255, 255, 0.733);
+    z-index: 30; 
+}
+
+.buttonBox .buttonbg {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #316d93;
+    z-index: 20;
+    transition: height 0.3s ease; 
+}
+
+.buttonBox:hover .buttonbg, .buttonBox:hover .more-detail{
+    height: 40px;
+    color: white;
+}
+
+
+/* ------------ PAGINATION--------------*/  
+.container .paginationContainer{
+    display: flex;
+}
+.container .paginationContainer .title{
+    flex-basis: 50%;
+}
+.container .paginationContainer .pageBox{
+    flex-basis: 50%;
+}
+.container .paginationContainer .pageBox .swiper-pagination {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    text-align: end;
+    justify-content: end;
+    gap: 5px;
+}
+
+.container .paginationContainer .pageBox .swiper-pagination-bullet {
+    border: 1px solid rgba(0, 0, 0, 0.276);
+    background-color: white;
+    opacity: 1; /* Ensure bullets are visible */
+    width: 12px; /* Set width for circle */
+    height: 12px; /* Set height for circle */
+}
+
+.container .paginationContainer .pageBox .swiper-pagination-bullet-active {
+    background: #316d93;/* Customize active bullet color */
+}

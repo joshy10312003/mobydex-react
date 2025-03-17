@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import '../../style/card.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';

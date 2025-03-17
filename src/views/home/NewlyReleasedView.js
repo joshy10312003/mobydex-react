@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import '../../style/card.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -40,7 +39,7 @@ const UpcomingMovieView = () => {
                         <img src={posterURL} className="card-img-top" alt={movie.title} />
                         <div className="card-body">
                             <div className="mb-2">
-                                <p className="text-secondary d-inline-block align-middle card-text">Date: {movie.released}</p>
+                                <p className="text-secondary d-inline-block align-middle card-text">Date: {movie.release_date}</p>
                             </div>
                             <p className="card-title">{movie.title}</p>
                             <div>
@@ -90,36 +89,31 @@ const UpcomingMovieView = () => {
                     options
                 );
                 const data = await response.json();
-
-                const fetchGenres = await fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", options);
-                const genreData = await fetchGenres.json();
-
+    
+                const genreResponse = await fetch(
+                    "https://api.themoviedb.org/3/genre/movie/list?language=en",
+                    options
+                );
+                const genreData = await genreResponse.json();
+    
                 const currentDate = new Date();
-
-                console.log(currentDate);
-
-                const fetchMovies = data.results
-                    .filter(movie => movie.poster_path !== null) // Exclude movies with null poster_path
-
-                if (data.results[0].popularity < 20) {
-                    fetchMovies();
-                }
-                else {
-                    if (fetchMovies.length === 0) {
-                        fetchMovies();
-                    }
-                    else {
-                        setIsLoading(false);
-                        setMovieDetails(fetchMovies);  
-                        setGenreList(genreData.genres);
-                    }
-                }
+    
+                // Filter only movies that have been released (current date or earlier)
+                const newlyReleasedMovies = data.results
+                    .filter(movie => movie.poster_path !== null && new Date(movie.release_date) <= currentDate)
+                    .sort((a, b) => new Date(b.release_date) - new Date(a.release_date)); // Sort latest first
+    
+                setIsLoading(false);
+                setMovieDetails(newlyReleasedMovies);
+                setGenreList(genreData.genres);
             } catch (error) {
                 console.error("Error fetching movies:", error);
             }
         };
-        fetchMovies(); // ITS OUTSIDE AND CALLED THE CODE INSIDE BASICALLY AN INSIDE FUNCTION
-    }, []); // REFERS TO AN ARRAY
+    
+        fetchMovies();
+    }, []);
+    
 
     return (
         <div className="m-0 w-100 py-5">
